@@ -94,6 +94,7 @@ export class EditorUi extends m.mxEventSource {
       this.splitview = new SplitView(); // GS
       this.splitview.activate(document.getElementById("split-view"));   // GS
 	    
+	    /*
       var ele = document.getElementById("split-view");   // GS
       var child1 = ele.children[0];
       var child2 = ele.children[2];
@@ -101,8 +102,11 @@ export class EditorUi extends m.mxEventSource {
       console.log("Left",child1.scrollLeft);
       child2.scrollTop = child1.scrollTop;
       child2.scrollLeft = child1.scrollLeft;
+*/
+      //this.refresh();
 
-
+      this.editor2.resetGraph();
+      this.editor2.graph.sizeDidChange();
       // Disables HTML and text selection
       var textEditing = m.mxUtils.bind(this, function (evt) {
         if (evt == null) {
@@ -4144,6 +4148,7 @@ EditorUi.prototype.createUi = function () {
 
   let model = this.editor.graph.model;            // GS
   let themes = this.editor.graph.themes;
+  let lightbox = this.editor.graph.lightbox;
   var con = document.getElementById("split2");    // GS
   this.editor2 = new Editor(                      // GS
     this.editor.chromeless,
@@ -4153,17 +4158,17 @@ EditorUi.prototype.createUi = function () {
     this.editor.editable,
   ); 
   var graph2 = this.editor2.graph;
+  graph2.lightbox = lightbox;
 
   graph2.init(con);
       //graph2.container.setAttribute("tabindex", "1");
       //graph2.container.style.cursor = "default";
 
 
-  //this.editor2.resetGraph();
   this.initCanvas(graph2);
   this.editor2.resetGraph();
   this.editor2.graph.sizeDidChange();
-
+/*
       var ele = document.getElementById("split-view");   // GS
       var child1 = ele.children[0];
       var child2 = ele.children[2];
@@ -4171,6 +4176,8 @@ EditorUi.prototype.createUi = function () {
       console.log("Left",child1.scrollLeft);
       child2.scrollTop = child1.scrollTop;
       child2.scrollLeft = child1.scrollLeft;
+      */
+  
 
 /********************************************/
   // Creates the sidebar
